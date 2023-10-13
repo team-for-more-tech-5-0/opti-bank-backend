@@ -6,6 +6,10 @@ type Customer struct {
 	Preferences []string `json:"customer_preferences"`
 }
 
-//func NewCustomer(Latitude float64, Longitude float64) *Customer {
-//
-//}
+func NewCustomer(Latitude float64, Longitude float64) *Customer {
+	return &Customer{
+		Latitude:    Latitude,
+		Longitude:   Longitude,
+		Preferences: nil,
+	}
+}
