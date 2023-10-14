@@ -25,39 +25,3 @@ type Bank struct {
 	TotalTime          int64                                                   `json:"totalTime"`
 	CurrentTypeService string                                                  `json:"currentTypeService"`
 }
-
-//func NewBank(
-//	id int64,
-//	salePointName string,
-//	address string,
-//	status string,
-//	schedule []Schedule,
-//	rko string,
-//	officeType string,
-//	salePointFormat string,
-//	suoavailability string,
-//	hasramp string,
-//	latitude float64,
-//	longitude float64,
-//	metrostation string,
-//	distance string,
-//	service service.Services,
-//) *Bank {
-//	return &Bank{
-//		ID:              id,
-//		SalePointName:   salePointName,
-//		Address:         address,
-//		Status:          status,
-//		OpenHours:       schedule,
-//		Rko:             rko,
-//		OfficeType:      officeType,
-//		SalePointFormat: salePointFormat,
-//		Suoavailability: suoavailability,
-//		Hasramp:         hasramp,
-//		Latitude:        latitude,
-//		Longitude:       longitude,
-//		Metrostation:    metrostation,
-//		Distance:        distance,
-//		Service:         service,
-//	}
-//}

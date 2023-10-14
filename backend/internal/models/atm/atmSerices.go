@@ -14,16 +14,3 @@ type Services struct {
 	NfcForBankCards   service.Service `json:"nfcForBankCards"`
 	SupportsChargeRub service.Service `json:"supportsChargeRub"`
 }
-
-func NewAtmServices(blind, QrRead, Wheelchair, SupportsEur, SupportsRub, SupportsUsd, NfcForBankCards, SupportsChargeRub service.Service) *Services {
-	return &Services{
-		Blind:             blind,
-		QrRead:            QrRead,
-		Wheelchair:        Wheelchair,
-		SupportsEur:       SupportsEur,
-		SupportsRub:       SupportsRub,
-		SupportsUsd:       SupportsUsd,
-		NfcForBankCards:   NfcForBankCards,
-		SupportsChargeRub: SupportsChargeRub,
-	}
-}
