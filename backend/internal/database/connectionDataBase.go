@@ -2,11 +2,10 @@ package database
 
 import (
 	"database/sql"
+	_ "github.com/lib/pq"
 	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/config"
 	"log"
 	"sync"
-
-	_ "github.com/lib/pq"
 )
 
 var (

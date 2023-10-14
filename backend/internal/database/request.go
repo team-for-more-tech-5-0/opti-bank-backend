@@ -33,6 +33,7 @@ func GetBanks() ([]bank.Bank, error) {
 		var openHoursByte []byte
 		//sql.NullString - На случай, если переменная в БД пустая
 		var rko sql.NullString
+		var openHoursIndividual []byte
 		var hasramp sql.NullString
 		var metroStation sql.NullString
 		var suoavailability sql.NullString
@@ -46,6 +47,7 @@ func GetBanks() ([]bank.Bank, error) {
 			&currentBank.Status,
 			&openHoursByte,
 			&rko,
+			&openHoursIndividual,
 			&currentBank.OfficeType,
 			&currentBank.SalePointFormat,
 			&suoavailability,
@@ -56,11 +58,11 @@ func GetBanks() ([]bank.Bank, error) {
 			&currentBank.Distance,
 			&kep,
 			&currentBank.MyBranch,
+			&services,
 			&currentBank.QueueIndividual,
 			&currentBank.QueueBusiness,
 			&currentBank.TimeIndividual,
 			&currentBank.TimeBusiness,
-			&services,
 		); err != nil {
 			panic(err)
 		}
@@ -71,6 +73,9 @@ func GetBanks() ([]bank.Bank, error) {
 		}
 		//decode OpenHours
 		if err := json.Unmarshal(openHoursByte, &currentBank.OpenHours); err != nil {
+			panic(err)
+		}
+		if err := json.Unmarshal(openHoursIndividual, &currentBank.OpenHoursIndividual); err != nil {
 			panic(err)
 		}
 

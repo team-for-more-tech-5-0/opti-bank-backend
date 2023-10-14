@@ -1,8 +1,19 @@
 package services
 
 import (
+	"errors"
 	"math"
 )
+
+func GetClientType(service string) (string, error) {
+	if service == "SMEservices" || service == "businessFinancing" || service == "corporateAccounts" || service == "corporateCreditCards" || service == "transactionAndPaymentServices" || service == "internationalOperationsServices" || service == "liquidityAndFinancialRiskManagement" {
+		return "servicesForBusinesses", nil
+	} else if service == "mortgageLoans" || service == "loansAndCredits" || service == "depositsAndSavings" || service == "investmentServices" || service == "bankAccountsAndCards" || service == "onlineBankingAndMobileApp" {
+		return "servicesForIndividuals", nil
+	} else {
+		return "", errors.New("unknown client type")
+	}
+}
 
 // Поиск по широте и долготе в радиусе
 func distance(lat1, lon1, lat2, lon2 float64) float64 {
