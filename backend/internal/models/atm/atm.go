@@ -10,14 +10,3 @@ type Atm struct {
 	Time      int64                  `json:"time"`
 	Queue     int64                  `json:"queue"`
 }
-
-//func NewAtm(id int64, address string, latitude float64, longitude float64, isAllDay bool, services Services) *Atm {
-//	return &Atm{
-//		ID:        id,
-//		Address:   address,
-//		Latitude:  latitude,
-//		Longitude: longitude,
-//		IsAllDay:  isAllDay,
-//		Services:  services,
-//	}
-//}

@@ -2,11 +2,13 @@ package bank
 
 import "encoding/json"
 
+// Время работы отделения
 type Schedule struct {
 	Days  string `json:"days"`
 	Hours string `json:"hours"`
 }
 
+// Перегрузка обнаружения переменной в БД
 func (s *Schedule) Scan(value interface{}) error {
 	if value == nil {
 		*s = Schedule{}

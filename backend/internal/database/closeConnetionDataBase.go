@@ -1,7 +1,7 @@
 package database
 
+// Закрываем соединение при завершении приложения
 func CloseConnection() {
-	// Закрываем соединение при завершении приложения
 	db, err := GetDatabase()
 	if err != nil {
 		panic(err)
