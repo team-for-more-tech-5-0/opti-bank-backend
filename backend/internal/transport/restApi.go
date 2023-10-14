@@ -23,5 +23,8 @@ func GetAllBanks(context *gin.Context) {
 		return
 	}
 	context.IndentedJSON(http.StatusOK, dbs)
+	//fmt.Println(dbs[0].Service)
+	//fmt.Println("000000")
+	//fmt.Println(dbs[0].Service["service"].(map[string]interface{})["servicesForBusinesses"].(map[string]interface{})["SMEservices"])
 	return
 }

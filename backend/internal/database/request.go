@@ -17,54 +17,52 @@ func GetBanks() ([]bank.Bank, error) {
 	// Запрос к базе данных для получения списка всех банков
 	rows, err := db.Query("SELECT * FROM bank")
 	if err != nil {
-		log.Fatal(err)
-		return nil, err
+		panic(err)
 	}
-	//Закрытие данных
-	defer func(rows *sql.Rows) {
-		err := rows.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(rows)
+	defer rows.Close()
 
 	var banks []bank.Bank // Предполагается, что у вас есть структура Bank для хранения данных
 
 	for rows.Next() {
-		var bank bank.Bank
+		var currentBank bank.Bank
 		var openHoursByte []byte
+		var rko sql.NullString
+		var hasramp sql.NullString
 		var metroStation sql.NullString
-		var serviceByte []byte
+		var suoavailability sql.NullString
+		var kep sql.NullString
+		var jsonbCol1 json.RawMessage
 		if err := rows.Scan(
-			&bank.ID,
-			&bank.SalePointName,
-			&bank.Address,
-			&bank.Status,
+			&currentBank.ID,
+			&currentBank.SalePointName,
+			&currentBank.Address,
+			&currentBank.Status,
 			&openHoursByte,
-			&bank.Rko,
-			&bank.OfficeType,
-			&bank.SalePointFormat,
-			&bank.Suoavailability,
-			&bank.Hasramp,
-			&bank.Latitude,
-			&bank.Longitude,
+			&rko,
+			&currentBank.OfficeType,
+			&currentBank.SalePointFormat,
+			&suoavailability,
+			&hasramp,
+			&currentBank.Latitude,
+			&currentBank.Longitude,
 			&metroStation,
-			&bank.Distance,
-			&bank.Kep,
-			&bank.MyBranch,
-			&serviceByte,
+			&currentBank.Distance,
+			&kep,
+			&currentBank.MyBranch,
+			&jsonbCol1,
 		); err != nil {
 			panic(err)
 		}
-		if err := json.Unmarshal(openHoursByte, &bank.OpenHours); err != nil {
-			panic(err)
-		}
-		err = json.Unmarshal(serviceByte, &bank.Service)
+		err = json.Unmarshal(jsonbCol1, &currentBank.Service)
 		if err != nil {
+			log.Fatal(err)
+		}
+
+		if err := json.Unmarshal(openHoursByte, &currentBank.OpenHours); err != nil {
 			panic(err)
 		}
 
-		banks = append(banks, bank)
+		banks = append(banks, currentBank)
 	}
 	return banks, nil
 }
