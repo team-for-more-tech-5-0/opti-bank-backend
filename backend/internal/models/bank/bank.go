@@ -1,6 +1,6 @@
 package bank
 
-import "github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/models/service"
+import "github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/models/service"
 
 type Bank struct {
 	ID              int64             `json:"bank_id"`

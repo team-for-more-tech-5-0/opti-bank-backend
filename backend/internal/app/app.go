@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/database"
-	"github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/transport"
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/database"
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/transport"
 )
 
 func Start() {

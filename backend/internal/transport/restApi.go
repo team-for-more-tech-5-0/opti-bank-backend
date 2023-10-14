@@ -1,8 +1,8 @@
 package transport
 
 import (
-	"github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/database"
 	"github.com/gin-gonic/gin"
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/database"
 	"net/http"
 )
 

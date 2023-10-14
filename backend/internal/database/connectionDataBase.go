@@ -2,7 +2,7 @@ package database
 
 import (
 	"database/sql"
-	"github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/config"
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/config"
 	"log"
 	"sync"
 
@@ -21,7 +21,7 @@ func GetDatabase() (*sql.DB, error) {
 		connectionString := config.ConnectionDataBaseString
 
 		// Устанавливаем соединение с базой данных
-		db, err := sql.Open(config.DataBaseName, connectionString)
+		db, err := sql.Open(config.DbName, connectionString)
 		if err != nil {
 			log.Fatal(err)
 		}

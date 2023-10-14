@@ -2,7 +2,7 @@ package database
 
 import (
 	"database/sql"
-	"github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/models/bank"
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/models/bank"
 )
 
 func GetBanks() ([]bank.Bank, error) {
