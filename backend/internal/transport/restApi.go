@@ -9,6 +9,7 @@ import (
 func Transport() {
 	router := gin.Default()
 	router.GET("/getAllBanks", GetAllBanks)
+	router.GET("/getAllAtms", GetAllAtms)
 
 	err := router.Run(":8088")
 	if err != nil {
@@ -26,5 +27,15 @@ func GetAllBanks(context *gin.Context) {
 	//fmt.Println(dbs[0].Service)
 	//fmt.Println("000000")
 	//fmt.Println(dbs[0].Service["service"].(map[string]interface{})["servicesForBusinesses"].(map[string]interface{})["SMEservices"])
+	return
+}
+
+func GetAllAtms(context *gin.Context) {
+	dbs, err := database.GetAtms()
+	if err != nil {
+		context.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Cannot connect to dataBase"})
+		return
+	}
+	context.IndentedJSON(http.StatusOK, dbs)
 	return
 }
