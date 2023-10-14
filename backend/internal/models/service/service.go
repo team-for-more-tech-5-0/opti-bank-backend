@@ -1,60 +1,30 @@
 package service
 
+type ServicesForBusinesses struct {
+	SMEServices                         Service `json:"SMEservices"`
+	BusinessFinancing                   Service `json:"businessFinancing"`
+	CorporateAccounts                   Service `json:"corporateAccounts"`
+	CorporateCreditCards                Service `json:"corporateCreditCards"`
+	TransactionAndPaymentServices       Service `json:"transactionAndPaymentServices"`
+	InternationalOperationsServices     Service `json:"internationalOperationsServices"`
+	LiquidityAndFinancialRiskManagement Service `json:"liquidityAndFinancialRiskManagement"`
+}
+
+type ServicesForIndividuals struct {
+	MortgageLoans             Service `json:"mortgageLoans"`
+	LoansAndCredits           Service `json:"loansAndCredits"`
+	DepositsAndSavings        Service `json:"depositsAndSavings"`
+	InvestmentServices        Service `json:"investmentServices"`
+	BankAccountsAndCards      Service `json:"bankAccountsAndCards"`
+	OnlineBankingAndMobileApp Service `json:"onlineBankingAndMobileApp"`
+}
+
 type Service struct {
-	ServicesForBusinesses struct {
-		SMEservices struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"SMEservices"`
-		BusinessFinancing struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"businessFinancing"`
-		CorporateAccounts struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"corporateAccounts"`
-		CorporateCreditCards struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"corporateCreditCards"`
-		TransactionAndPaymentServices struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"transactionAndPaymentServices"`
-		InternationalOperationsServices struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"internationalOperationsServices"`
-		LiquidityAndFinancialRiskManagement struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"liquidityAndFinancialRiskManagement"`
-	} `json:"servicesForBusinesses"`
-	ServicesForIndividuals struct {
-		MortgageLoans struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"mortgageLoans"`
-		LoansAndCredits struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"loansAndCredits"`
-		DepositsAndSavings struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"depositsAndSavings"`
-		InvestmentServices struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"investmentServices"`
-		BankAccountsAndCards struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"bankAccountsAndCards"`
-		OnlineBankingAndMobileApp struct {
-			ServiceActivity   string `json:"serviceActivity"`
-			ServiceCapability string `json:"serviceCapability"`
-		} `json:"onlineBankingAndMobileApp"`
-	} `json:"servicesForIndividuals"`
+	ServiceActivity   string `json:"serviceActivity"`
+	ServiceCapability string `json:"serviceCapability"`
+}
+
+type Services struct {
+	ServiceForBusinesses   ServicesForBusinesses  `json:"servicesForBusinesses"`
+	ServicesForIndividuals ServicesForIndividuals `json:"servicesForIndividuals"`
 }

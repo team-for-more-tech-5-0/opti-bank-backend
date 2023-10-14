@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"encoding/json"
 	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/models/bank"
 	"log"
 )
@@ -31,12 +32,15 @@ func GetBanks() ([]bank.Bank, error) {
 
 	for rows.Next() {
 		var bank bank.Bank
+		var openHoursByte []byte
+		var metroStation sql.NullString
+		var serviceByte []byte
 		if err := rows.Scan(
 			&bank.ID,
 			&bank.SalePointName,
 			&bank.Address,
 			&bank.Status,
-			&bank.Schedule,
+			&openHoursByte,
 			&bank.Rko,
 			&bank.OfficeType,
 			&bank.SalePointFormat,
@@ -44,14 +48,22 @@ func GetBanks() ([]bank.Bank, error) {
 			&bank.Hasramp,
 			&bank.Latitude,
 			&bank.Longitude,
-			&bank.Metrostation,
+			&metroStation,
 			&bank.Distance,
 			&bank.Kep,
 			&bank.MyBranch,
-			&bank.Service,
+			&serviceByte,
 		); err != nil {
-			return nil, err
+			panic(err)
 		}
+		if err := json.Unmarshal(openHoursByte, &bank.OpenHours); err != nil {
+			panic(err)
+		}
+		err = json.Unmarshal(serviceByte, &bank.Service)
+		if err != nil {
+			panic(err)
+		}
+
 		banks = append(banks, bank)
 	}
 	return banks, nil
