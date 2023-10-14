@@ -14,7 +14,7 @@ func Transport() {
 	router.GET("/getAllBanks", GetAllBanks)
 	router.GET("/getAllAtms", GetAllAtms)
 	router.GET("/getNearBanks", GetNearBanks)
-	//router.GET("/getNearBanks", GetNearAtms)
+	router.GET("/getNearAtms", GetNearAtms)
 
 	err := router.Run(":8088")
 	if err != nil {
@@ -75,6 +75,30 @@ func GetNearBanks(context *gin.Context) {
 	return
 }
 
-//func GetNearAtms(context *gin.Context) {
-//
-//}
+func GetNearAtms(context *gin.Context) {
+	latitudeStr := context.Query("latitude")
+	longitudeStr := context.Query("longitude")
+
+	latitude, err := strconv.ParseFloat(latitudeStr, 64)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "invalid latitude number to convert float"})
+		log.Println(err)
+		return
+	}
+
+	longitude, err := strconv.ParseFloat(longitudeStr, 64)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "invalid latitude number to convert float"})
+		log.Println(err)
+		return
+	}
+	dbs, err := services.CalculateNearAtms(latitude, longitude, 1)
+	if err != nil {
+		log.Println(err)
+		context.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot find near banks"})
+		return
+	}
+
+	context.IndentedJSON(http.StatusOK, dbs)
+	return
+}
