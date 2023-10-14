@@ -64,7 +64,7 @@ func GetNearBanks(context *gin.Context) {
 		log.Println(err)
 		return
 	}
-	dbs, err := services.CalculateNearBanks(latitude, longitude, 5, service)
+	dbs, err := services.CalculateNearBanks(latitude, longitude, 1, service)
 	if err != nil {
 		log.Println(err)
 		context.JSON(http.StatusInternalServerError, gin.H{"error": "Cannot find near banks"})

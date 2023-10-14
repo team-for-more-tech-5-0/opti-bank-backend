@@ -11,6 +11,23 @@ import (
 
 func CalculateNearBanks(lat, lon float64, radius float64, service string) ([]bank.Bank, error) {
 	var result []bank.Bank
+	radiusStep := 1.0
+	//|| (math.Abs(float64(result[0].TotalTime)-float64(result[len(result)-1].TotalTime))/float64(result[0].TotalTime) > 0.15)
+
+	for len(result) < 3 {
+		newResult, err := FindNearBanks(lat, lon, radius, service)
+		if err != nil {
+			log.Fatal(err)
+			return nil, err
+		}
+		result = newResult
+		radius += radiusStep
+		radiusStep *= 1.5
+	}
+	return result, nil
+}
+func FindNearBanks(lat, lon float64, radius float64, service string) ([]bank.Bank, error) {
+	var result []bank.Bank
 
 	banks, err := database.GetBanks()
 	if err != nil {
@@ -32,11 +49,10 @@ func CalculateNearBanks(lat, lon float64, radius float64, service string) ([]ban
 	sort.Slice(result, func(i, j int) bool {
 		return result[i].TotalTime < result[j].TotalTime
 	})
-	for _, currentBank := range result {
-		fmt.Printf("time: %d\n", currentBank.TotalTime)
-	}
+
 	return result, nil
 }
+
 func isServiceAvailable(s string, service map[string]map[string]map[string]map[string]interface{}, currentBank *bank.Bank) bool {
 	for _, value := range service {
 		for serviceType, v1 := range value {
@@ -53,21 +69,6 @@ func isServiceAvailable(s string, service map[string]map[string]map[string]map[s
 
 	return false
 }
-
-//func iterate(v interface{}) {
-//	switch val := v.(type) {
-//	case map[string]map[string]interface{}:
-//		fmt.Println("map2:")
-//		for k1, v1 := range val {
-//			fmt.Printf("  %s:\n\n", k1)
-//			for k2, v2 := range v1 {
-//				fmt.Printf("    %s: %v\n----\n", k2, v2)
-//			}
-//		}
-//	default:
-//		fmt.Println("unknown type:", val)
-//	}
-//}
 
 func distance(lat1, lon1, lat2, lon2 float64) float64 {
 	const R = 6371 // Earth radius in km
