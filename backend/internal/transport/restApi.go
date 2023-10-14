@@ -20,6 +20,7 @@ func GetAllBanks(context *gin.Context) {
 	dbs, err := database.GetBanks()
 	if err != nil {
 		context.IndentedJSON(http.StatusInternalServerError, gin.H{"error": "Cannot connect to dataBase"})
+		return
 	}
 	context.IndentedJSON(http.StatusOK, dbs)
 	return

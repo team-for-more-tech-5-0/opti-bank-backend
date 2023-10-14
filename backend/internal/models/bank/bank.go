@@ -17,6 +17,8 @@ type Bank struct {
 	Longitude       float64           `json:"longitude"`
 	Metrostation    string            `json:"metrostation"`
 	Distance        string            `json:"distance"`
+	Kep             bool              `json:"kep"`
+	MyBranch        bool              `json:"mybranch"`
 	Service         []service.Service `json:"services"`
 }
 

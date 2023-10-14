@@ -3,19 +3,20 @@ package database
 import (
 	"database/sql"
 	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/models/bank"
+	"log"
 )
 
 func GetBanks() ([]bank.Bank, error) {
 	// Устанавливаем заголовок ответа на JSON
 	db, err := GetDatabase()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Запрос к базе данных для получения списка всех банков
-	rows, err := db.Query("SELECT * FROM Bank")
+	rows, err := db.Query("SELECT * FROM bank")
 	if err != nil {
-		//http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Fatal(err)
 		return nil, err
 	}
 	//Закрытие данных
@@ -45,12 +46,13 @@ func GetBanks() ([]bank.Bank, error) {
 			&bank.Longitude,
 			&bank.Metrostation,
 			&bank.Distance,
+			&bank.Kep,
+			&bank.MyBranch,
 			&bank.Service,
 		); err != nil {
 			return nil, err
 		}
 		banks = append(banks, bank)
 	}
-
 	return banks, nil
 }

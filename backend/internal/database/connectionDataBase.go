@@ -21,7 +21,7 @@ func GetDatabase() (*sql.DB, error) {
 		connectionString := config.ConnectionDataBaseString
 
 		// Устанавливаем соединение с базой данных
-		db, err := sql.Open(config.DbName, connectionString)
+		db, err = sql.Open(config.DbName, connectionString)
 		if err != nil {
 			log.Fatal(err)
 		}
