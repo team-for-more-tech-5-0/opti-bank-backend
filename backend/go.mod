@@ -1,4 +1,4 @@
-module github.com/Spawn4real/hackthon_more.tech_5.0.git
+module github.com/team-for-more-tech-5-0/opti-bank-backend.git
 
 go 1.21.3
 

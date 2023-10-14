@@ -1,5 +1,11 @@
 package app
 
-func Start() {
+import (
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/database"
+	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/transport"
+)
 
+func Start() {
+	transport.Transport()
+	database.CloseConnection()
 }

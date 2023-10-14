@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/Spawn4real/hackthon_more.tech_5.0.git/internal/app"
-)
+import "github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/app"
 
 func main() {
 	app.Start()
