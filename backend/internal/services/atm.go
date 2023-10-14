@@ -6,10 +6,12 @@ import (
 	"log"
 )
 
+// Подсчет ближайщих банкоматов
 func CalculateNearAtms(lat, lon float64, radius float64) ([]atm.Atm, error) {
 	var result []atm.Atm
 	radiusStep := 1.0
 
+	//Поиск, пока не будет минимум 3 банкомата
 	for len(result) < 3 {
 		newResult, err := FindNearAtms(lat, lon, radius)
 		if err != nil {
@@ -18,6 +20,7 @@ func CalculateNearAtms(lat, lon float64, radius float64) ([]atm.Atm, error) {
 		}
 		result = newResult
 		radius += radiusStep
+		//Каждый раз увеличиваем радиус поиска
 		radiusStep *= 1.5
 	}
 	return result, nil

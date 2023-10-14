@@ -8,10 +8,10 @@ import (
 	"sort"
 )
 
+// Поиск ближайщих отделений
 func CalculateNearBanks(lat, lon float64, radius float64, service string) ([]bank.Bank, error) {
 	var result []bank.Bank
 	radiusStep := 1.0
-	//|| (math.Abs(float64(result[0].TotalTime)-float64(result[len(result)-1].TotalTime))/float64(result[0].TotalTime) > 0.15)
 
 	for len(result) < 3 {
 		newResult, err := FindNearBanks(lat, lon, radius, service)

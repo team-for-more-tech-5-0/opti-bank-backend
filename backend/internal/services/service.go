@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+// Поиск по широте и долготе в радиусе
 func distance(lat1, lon1, lat2, lon2 float64) float64 {
 	const R = 6371 // Earth radius in km
 	dLat := deg2rad(lat2 - lat1)
