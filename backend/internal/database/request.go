@@ -50,6 +50,10 @@ func GetBanks() ([]bank.Bank, error) {
 			&currentBank.Distance,
 			&kep,
 			&currentBank.MyBranch,
+			&currentBank.QueueIndividual,
+			&currentBank.QueueBusiness,
+			&currentBank.TimeIndividual,
+			&currentBank.TimeBusiness,
 			&services,
 		); err != nil {
 			panic(err)
@@ -93,6 +97,8 @@ func GetAtms() ([]atm.Atm, error) {
 			&currentAtm.Longitude,
 			&currentAtm.IsAllDay,
 			&services,
+			&currentAtm.Time,
+			&currentAtm.Queue,
 		); err != nil {
 			panic(err)
 		}

@@ -7,6 +7,8 @@ type Atm struct {
 	Longitude float64                `json:"longitude"`
 	IsAllDay  bool                   `json:"allday"`
 	Services  map[string]interface{} `json:"services"`
+	Time      int64                  `json:"time"`
+	Queue     int64                  `json:"queue"`
 }
 
 //func NewAtm(id int64, address string, latitude float64, longitude float64, isAllDay bool, services Services) *Atm {
