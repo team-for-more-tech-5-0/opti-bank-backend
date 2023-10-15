@@ -11,6 +11,7 @@ import (
 
 func Transport() {
 	router := gin.Default()
+	router.Use(cors())
 	router.GET("/getAllBanks", GetAllBanks)
 	router.GET("/getAllAtms", GetAllAtms)
 	router.GET("/getNearBanks", GetNearBanks)
@@ -98,4 +99,18 @@ func GetNearAtms(context *gin.Context) {
 
 	context.IndentedJSON(http.StatusOK, dbs)
 	return
+}
+
+// cors middleware
+func cors() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+		c.Next()
+	}
 }

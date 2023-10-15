@@ -15,7 +15,7 @@ type Bank struct {
 	Latitude            float64    `json:"latitude"`
 	Longitude           float64    `json:"longitude"`
 	Metrostation        string     `json:"metrostation"`
-	Distance            string     `json:"distance"`
+	Distance            float32    `json:"distance"`
 	Kep                 bool       `json:"kep"`
 	MyBranch            bool       `json:"mybranch"`
 	//для конвертации из типа jsonb-jsonb,jsonb....
