@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/database"
 	"github.com/team-for-more-tech-5-0/opti-bank-backend.git/internal/models/bank"
 	"log"
@@ -44,12 +43,17 @@ func FindNearBanks(lat, lon float64, radius float64, service string, clientType 
 	for _, currentBank := range banks {
 		dist := distance(lat, lon, currentBank.Latitude, currentBank.Longitude)
 		if dist <= radius && isServiceAvailable(service, currentBank.Service) && ((clientType == "servicesForBusinesses" && currentBank.OpenHours[0].Hours != "") || (clientType == "servicesForIndividuals" && currentBank.OpenHoursIndividual[0].Hours != "")) {
+			//Расчитать время в зависимости от юр или физ
 			if clientType == "servicesForBusinesses" {
 				currentBank.TotalTime = currentBank.TimeBusiness * currentBank.QueueBusiness
 			} else {
 				currentBank.TotalTime = currentBank.TimeIndividual * currentBank.QueueIndividual
 			}
+			//Удалить ненужные сервисы юр или физ
 			removeNonClientTypeService(currentBank.Service, clientType)
+			//Подсчет км
+			currentBank.Distance = float32(haversine(lat, lon, currentBank.Latitude, currentBank.Longitude))
+			log.Printf("Added bank:%v\n-------\n", currentBank)
 			result = append(result, currentBank)
 		}
 	}
@@ -62,10 +66,10 @@ func FindNearBanks(lat, lon float64, radius float64, service string, clientType 
 
 func isServiceAvailable(s string, service map[string]map[string]map[string]map[string]interface{}) bool {
 	for _, value := range service {
-		for serviceType, v1 := range value {
-			fmt.Printf("serviceType:%s\n\n", serviceType)
+		for _, v1 := range value {
+			//fmt.Printf("serviceType:%s\n\n", serviceType)
 			for key, v2 := range v1 {
-				fmt.Printf("%v\n----\n", v2["serviceActivity"])
+				//fmt.Printf("%v\n----\n", v2["serviceActivity"])
 				if key == s && v2["serviceActivity"] == "AVAILABLE" {
 					return true
 				}
